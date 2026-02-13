@@ -55,7 +55,7 @@ exports.signup = async(req, res)=>
                 }
 
                 //generate JWT token(1 hour expiry)
-                const token = jwt.sign({userId: user._id, email: user.email}, JWT_SECRET, {expiresIn: '1h'}); //sign a JWT with the user ID and secret key, set to expire in 1 hour
+                const token = jwt.sign({id: user._id, email: user.email}, JWT_SECRET, {expiresIn: '1h'}); //sign a JWT with the user ID and secret key, set to expire in 1 hour
             
                 res.json({message : 'Login successful', token , user : {
                     id: user._id,
