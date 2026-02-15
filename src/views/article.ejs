@@ -1,0 +1,88 @@
+<%- include('partials/header') %>
+
+<main class="container mx-auto mt-12 px-6 pb-20">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+        <a href="/blogs" class="text-sm font-bold text-indigo-600 hover:text-indigo-800 transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Community Feed
+        </a>
+    </nav>
+
+    <article class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <header class="mb-12">
+            <div class="flex flex-wrap gap-2 mb-6">
+                <% blog.tags.forEach(tag => { %>
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-500 bg-indigo-50 px-3 py-1.5 rounded-lg">
+                        #<%= tag %>
+                    </span>
+                <% }) %>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-8 leading-[1.1]">
+                <%= blog.title %>
+            </h1>
+
+            <div class="flex items-center justify-between py-8 border-y border-slate-100">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-lg shadow-indigo-100">
+                        <%= blog.author.first_name[0] %>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-slate-900 leading-tight">
+                            <%= blog.author.first_name %> <%= blog.author.last_name %>
+                        </p>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
+                            <%= new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <div class="text-right">
+                        <p class="text-[10px] font-black text-indigo-600 bg-indigo-50 px-2 py-1 rounded uppercase mb-1 inline-block">
+                            ⏱️ <%= blog.reading_time %> Min Read
+                        </p>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            <%= blog.read_count %> Views
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- The Content (The Body) -->
+        <div class="prose prose-slate prose-lg max-w-none text-slate-700 leading-relaxed space-y-6">
+            <% 
+                // Simple logic to convert newlines to paragraphs for a better "Reader Experience"
+                const paragraphs = blog.body.split('\n').filter(p => p.trim() !== '');
+                paragraphs.forEach(p => { 
+            %>
+                <p class="text-xl font-medium opacity-90 mb-8"><%= p %></p>
+            <% }) %>
+        </div>
+
+        <!-- Footer / Action Area -->
+        <footer class="mt-20 pt-12 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="flex items-center gap-4">
+                <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Share this yarn:</span>
+                <div class="flex gap-2">
+                    <button class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition">🐦</button>
+                    <button class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition">🔗</button>
+                </div>
+            </div>
+
+            <% if (typeof user !== 'undefined' && user && user.id === blog.author._id.toString()) { %>
+                <div class="flex gap-4">
+                    <a href="/blogs/<%= blog._id %>/edit" class="bg-slate-100 text-slate-700 px-6 py-3 rounded-2xl font-black text-sm hover:bg-slate-200 transition">Edit Draft</a>
+                    <button class="bg-red-50 text-red-500 px-6 py-3 rounded-2xl font-black text-sm hover:bg-red-100 transition">Delete Yarn</button>
+                </div>
+            <% } %>
+        </footer>
+    </article>
+</main>
+
+<%- include('partials/footer') %>

@@ -6,6 +6,16 @@ const jwt = require('jsonwebtoken'); //import jsonwebtoken for token generation
 
 const JWT_SECRET = process.env.JWT_SECRET || 'yarncom_secret_key'; //secret key for signing JWTs, should be stored in environment variables
 
+exports.renderLoginPage = (req, res) => {
+    
+    res.render('login', { error: null });// This tells Express to look in /views for login.ejs and render it, passing an error variable that can be used to display any login errors on the page
+};
+
+exports.renderSignupPage = (req, res) => {
+    // This tells Express to look in /views for signup.ejs
+    res.render('signup', { error: null }); 
+};
+
 //signup controller to handle user registration
 exports.signup = async(req, res)=>
 {
@@ -56,7 +66,15 @@ exports.signup = async(req, res)=>
 
                 //generate JWT token(1 hour expiry)
                 const token = jwt.sign({id: user._id, email: user.email}, JWT_SECRET, {expiresIn: '1h'}); //sign a JWT with the user ID and secret key, set to expire in 1 hour
-            
+                
+                res.cookie('token', token,{httpOnly: true, maxAge: 3600000});//set cookie for the browser session 
+
+                if(req.headers.accept?.includes('text/html'))
+                {
+                    return res.redirect('/blogs');
+                }
+
+
                 res.json({message : 'Login successful', token , user : {
                     id: user._id,
                     first_name: user.first_name,
@@ -69,3 +87,10 @@ exports.signup = async(req, res)=>
                 res.status(500).json({error: err.message}); //return error response if something goes wrong
             }
         };
+
+        //logout controller to handle user logout
+        exports.logout =(req,res) =>
+            {
+                res.clearCookie('token'); //clear the authentication token cookie
+                res.redirect('/blogs'); //redirect to the blogs page after logout
+            };

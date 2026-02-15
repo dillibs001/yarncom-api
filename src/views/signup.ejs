@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<main class="min-h-[80vh] flex items-center justify-center px-6 py-12">
+    <div class="bg-white p-10 rounded-[40px] shadow-2xl shadow-indigo-100 border border-slate-100 w-full max-w-lg">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-black text-slate-900 tracking-tight">Join the Story.</h1>
+            <p class="text-slate-500 font-medium mt-2">Create your Yarncom ID to start spinning yarns.</p>
+        </header>
+
+        <form action="/auth/signup" method="POST" class="space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">First Name</label>
+                    <input type="text" name="first_name" required placeholder="Jane" 
+                        class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Last Name</label>
+                    <input type="text" name="last_name" required placeholder="Doe" 
+                        class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Email Address</label>
+                <input type="email" name="email" required placeholder="jane@example.com" 
+                    class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium">
+            </div>
+            
+            <div>
+                <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Password</label>
+                <input type="password" name="password" required placeholder="Min. 6 characters" 
+                    class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium">
+            </div>
+
+            <button type="submit" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-lg hover:bg-indigo-700 hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-xl shadow-indigo-100">
+                Create Account
+            </button>
+        </form>
+
+        <footer class="mt-8 text-center">
+            <p class="text-sm text-slate-500 font-medium">
+                Already a member? <a href="/auth/login" class="text-indigo-600 font-bold hover:underline">Sign in instead</a>
+            </p>
+        </footer>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

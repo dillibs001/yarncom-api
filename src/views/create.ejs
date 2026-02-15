@@ -1,0 +1,62 @@
+<%- include('partials/header') %>
+
+<main class="container mx-auto mt-12 px-6 pb-20">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-12">
+            <a href="/blogs" class="text-sm font-bold text-slate-400 hover:text-indigo-600 transition flex items-center gap-2 mb-4">
+                ← Back to Feed
+            </a>
+            <h1 class="text-5xl font-black tracking-tight text-slate-900">Spin a New <span class="text-indigo-600">Yarn.</span></h1>
+            <p class="text-slate-500 text-lg mt-2">What's on your mind today?</p>
+        </header>
+
+        <form action="/blogs" method="POST" class="space-y-8 bg-white p-10 rounded-[40px] shadow-2xl shadow-indigo-100/50 border border-slate-100">
+            <!-- Title Field -->
+            <div>
+                <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">Yarn Title</label>
+                <input type="text" name="title" required placeholder="The Art of Motion..." 
+                    class="w-full text-3xl font-bold p-0 border-none focus:ring-0 placeholder:text-slate-200 outline-none">
+            </div>
+
+            <!-- Tags & State -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-50">
+                <div>
+                    <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">Tags (Comma separated)</label>
+                    <input type="text" name="tags" placeholder="mographics, design, tutorial" 
+                        class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">Publishing State</label>
+                    <select name="state" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-slate-700">
+                        <option value="draft">Save as Draft (Private)</option>
+                        <option value="published">Publish to Community (Public)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">Short Description</label>
+                <input type="text" name="description" placeholder="A brief summary of your story..." 
+                    class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium">
+            </div>
+
+            <!-- Body Content -->
+            <div>
+                <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">The Story</label>
+                <textarea name="body" required rows="12" placeholder="Start writing here..." 
+                    class="w-full p-6 bg-slate-50 border border-slate-100 rounded-[32px] focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium leading-relaxed"></textarea>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center justify-end gap-4 pt-8 border-t border-slate-50">
+                <a href="/blogs" class="px-8 py-4 font-bold text-slate-400 hover:text-slate-600 transition">Cancel</a>
+                <button type="submit" class="bg-indigo-600 text-white px-10 py-4 rounded-2xl font-black text-lg hover:bg-indigo-700 hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-xl shadow-indigo-100">
+                    Save Yarn
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

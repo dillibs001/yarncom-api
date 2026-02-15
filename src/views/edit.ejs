@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<main class="container mx-auto mt-12 px-6 pb-20">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-12">
+            <a href="/blogs/my-yarns" class="text-sm font-bold text-slate-400 hover:text-indigo-600 transition flex items-center gap-2 mb-4">
+                ← Back to Studio
+            </a>
+            <h1 class="text-5xl font-black tracking-tight text-slate-900">Tweak your <span class="text-indigo-600">Yarn.</span></h1>
+            <p class="text-slate-500 text-lg mt-2">Adjust your story before the final render.</p>
+        </header>
+ 
+        <form action="/blogs/<%= blog._id %>/update" method="POST" class="space-y-8 bg-white p-10 rounded-[40px] shadow-2xl shadow-indigo-100/50 border border-slate-100">
+            <div>
+                <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">Yarn Title</label>
+                <input type="text" name="title" required value="<%= blog.title %>"
+                    class="w-full text-3xl font-bold p-0 border-none focus:ring-0 outline-none text-slate-800">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-50">
+                <div>
+                    <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">Tags (Comma separated)</label>
+                    <input type="text" name="tags" value="<%= blog.tags.join(', ') %>" 
+                        class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">Publishing State</label>
+                    <select name="state" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-slate-700">
+                        <option value="draft" <%= blog.state === 'draft' ? 'selected' : '' %>>Save as Draft (Private)</option>
+                        <option value="published" <%= blog.state === 'published' ? 'selected' : '' %>>Publish to Community (Public)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">The Story</label>
+                <textarea name="body" required rows="12" 
+                    class="w-full p-6 bg-slate-50 border border-slate-100 rounded-[32px] focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-medium leading-relaxed"><%= blog.body %></textarea>
+            </div>
+
+            <div class="flex items-center justify-end gap-4 pt-8 border-t border-slate-50">
+                <button type="submit" class="bg-indigo-600 text-white px-10 py-4 rounded-2xl font-black text-lg hover:bg-indigo-700 hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-xl shadow-indigo-100">
+                    Update Render
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
