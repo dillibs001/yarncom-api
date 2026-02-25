@@ -84,7 +84,7 @@ I am documenting the development of **Yarncom** as a series of technical deep-di
 
 * **GitHub Repository**: https://github.com/dillibs001/yarncom-api
 
-* **Live Demo**: [Deployment in Progress]
+* **Live Demo**: [Yarncom](https://yarncom-api.onrender.com/blogs)
 
 Built with ❤️ as part of a progressive learning journey in Backend Engineering
 
